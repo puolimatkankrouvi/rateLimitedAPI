@@ -5,7 +5,7 @@ function setTimeWindow(time, requestCounts) {
     function() {
       requestCounts.clear();
     },
-    // Interval time from seconds to milliseconds
+    // Time interval, from seconds to milliseconds
     time * 1000
   )
 }
