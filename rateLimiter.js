@@ -17,43 +17,43 @@ function rateLimiter(options) {
     })
   }
 
-  setTimeWindow(options.timeWindow, requestCounts)
+  setTimeWindow(options.timeWindow, requestCounts);
 
   /* Function that actually does the limiting */
   function Limit(req, res, next) {
     // Defaults to unknown ip if IP not in request
-    var ipAddress = 'unknown_ip'
+    var ipAddress = 'unknown_ip';
     if (req.ip) {
-      ipAddress = req.ip
+      ipAddress = req.ip;
     }
 
-    increment(ipAddress)
+    increment(ipAddress);
 
-    var requests = requestCounts.get(ipAddress)
+    var requests = requestCounts.get(ipAddress);
 
     if (requests <= options.maxRequests) {
-      next()
+      next();
     }
     else {
-      var message = 'Too many requests, please try again later.'
-      res.status(429).send(message)
+      var message = 'Too many requests, please try again later.';
+      res.status(429).send(message);
     }
   };
 
-  return Limit
+  return Limit;
 }
 
 function increment(ip) {
   // Increments by one if key exists
   if (requestCounts.containsKey(ip)) {
-    var oldValue = requestCounts.get(ip)
-    var newValue = oldValue + 1
-    requestCounts.set(ip, newValue)
+    var oldValue = requestCounts.get(ip);
+    var newValue = oldValue + 1;
+    requestCounts.set(ip, newValue);
   }
   else {
     // Initial value 1
-    requestCounts.set(ip, 1)
+    requestCounts.set(ip, 1);
   }
 };
 
-module.exports = rateLimiter
+module.exports = rateLimiter;

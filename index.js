@@ -14,11 +14,11 @@ app.use(
 )
 
 app.get('/', (req, res) => {
-  res.send('Hello')
+  res.send('Hello');
 })
 
-const PORT = '3000'
+const PORT = '3000';
 
 app.listen(PORT, () => {
-  console.log('Server running at port %s', PORT)
+  console.log('Server running at port %s', PORT);
 })
